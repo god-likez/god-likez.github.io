@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  
+  </head>
+<body onload="count1()" >
+
+<!--编写页面布局-->
+<div>
+  <div id="subject"></div>
+<button id="A" onclick="select(this.id)"></button>
+<button id="B" onclick="select(this.id)"></button>
+<button id="C" onclick="select(this.id)"></button>
+<button id="D" onclick="select(this.id)"></button>
+</div>
+<script>
+  //将标签对象化
+  var a=document.getElementById("A");
+  var b=document.getElementById("B");
+  var c=document.getElementById("C");
+  var d=document.getElementById("D");
+  var sub=document.getElementById("subject");
+
+var x=0;
+function count1(){
+	alert("欢迎来到计算题测试！");
+	count();
+}
+  //计算函数
+  function  count(){
+    //生成随机数来代表计算符号和正确选项结果和算式
+    var option=Math.floor(Math.random()*4+1);
+     x=option;
+    var mark=Math.floor(Math.random()*4+1);
+    var number1=Math.floor(Math.random()*100+1);
+    var number2=Math.floor(Math.random()*100+1);
+    var t=0;
+    //选择结构来生成计算的符号
+    switch (mark){
+      case 1:
+        sub.innerHTML=number1+"+"+number2;
+        t=number1+number2;
+        break;
+      case 2:
+        sub.innerHTML=number1+"-"+number2;
+        t=number1-number2;
+        break;
+      case 3:
+        sub.innerHTML=number1+"*"+number2;
+        t=number1*number2;
+
+        break;
+      case 4:
+        sub.innerHTML=number1+"/"+number2;
+        t=number1/number2;
+        break;
+      default:
+        sub.innerHTML="错误！";
+        break;
+    }
+    //生成正确选项
+    switch (option){
+      case 1:
+        a.innerHTML="A."+t;
+        b.innerHTML="B."+Math.floor(Math.random()*100+t);
+        c.innerHTML="C."+Math.floor(Math.random()*100+t);
+        d.innerHTML="D."+Math.floor(Math.random()*100+t);
+        break;
+      case 2:
+        a.innerHTML="A."+Math.floor(Math.random()*100+t);
+        b.innerHTML="B."+t;
+        c.innerHTML="C."+Math.floor(Math.random()*100+t);
+        d.innerHTML="D."+Math.floor(Math.random()*100+t);
+        break;
+      case 3:
+        a.innerHTML="A."+Math.floor(Math.random()*100+t);
+        b.innerHTML="B."+Math.floor(Math.random()*100+t);
+        c.innerHTML="C."+t;
+        d.innerHTML="D."+Math.floor(Math.random()*100+t);
+        break;
+      case 4:
+          a.innerHTML="A."+Math.floor(Math.random()*100+t);
+          b.innerHTML="B."+Math.floor(Math.random()*100+t);
+          c.innerHTML="C."+Math.floor(Math.random()*100+t);
+          d.innerHTML="D."+t;
+          break;
+          default:
+            break;
+    }
+
+
+  }
+  //点击选项的功能
+  function select(id){
+    var o=id;
+    //判断选项与正确选项是否相符
+    if(o=="A"&&x==1){
+      alert("答对啦！");
+      count();
+    }else if(o=="B"&&x==2){
+      alert("答对啦！");
+      count();
+    }else if(o=="C"&&x==3){
+      alert("答对啦！");
+      count();
+    }else if(o=="D"&&x==4){
+      alert("答对啦！");
+      count();
+    }else{
+      alert("回答错误！");
+      count();
+    }
+
+  }
+
+
+</script>
+
+</body>
+</html>
