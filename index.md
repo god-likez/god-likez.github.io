@@ -14,5 +14,4 @@
  <body>
 <h1>欢迎！<h1>
  <a href="https://god-likez.github.io/homework.html">作业</a>
- </body>
-</html>
+
