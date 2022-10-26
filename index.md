@@ -13,6 +13,7 @@
  </head>
  <body>
 <h1>欢迎！<h1>
- <img src="我的主页.png">
+ 
+![image](我的主页.png) 
  <a href="https://god-likez.github.io/homework.html">作业</a>
 
