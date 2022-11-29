@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{ 	 margin: 0 ; cursor: pointer; 	 	}
+        div{ 	 background-color:rgba(100,100,50,0.1);
+            box-sizing: border-box ;
+            border:1px solid rgb(100,100,200) ;
+            border-radius: 50% ;
+            margin: 0 ;
+            padding: 0 ;
+            position: absolute ;
+            transition: all 0.5s ; }
+        div.db{ background-color:rgba(0,100,200,0.05);
+            border:0px solid ;
+            border-radius: 0% ; }
+        div p{ margin: auto;
+            padding: 10%;
+            color:rgb(55,160,232);
+            text-align:center;
+            text-shadow:1px 1px rgb(0,100,100); }
+    </style>
+</head>
+<body>
+
+</body>
+<script>
+    const NUMS=6;
+    let tsBalls=[];
+    let sn=0;
+    const S = ['考生的信息，在这里显示。离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。远芳侵古道，晴翠接荒城。又送王孙去，萋萋满别情。' , '挽弓当挽强，用箭当用长。射人先射马，擒贼先擒王。' , '危楼高百尺，手可摘星辰。不敢高声语，恐惊天上人。'] ;
+    document.body.addEventListener('mousemove',function (){
+        for(let ball of tsBalls){ball.setPositionDiv();}
+    });
+    document.body.addEventListener('touchmove',function (){
+        for(let ball of tsBalls){ball.setPositionDiv();}
+    });
+    document.body.addEventListener('click',function (){
+        for(let ball of tsBalls){ball.randPositionDiv();}
+    });
+    document.body.addEventListener('dblclick',function (){
+        console.log('double click');
+        for(let ball of tsBalls){this.removeChild(ball.dom);}
+        tsBalls=[];
+        sn===S.length-1?sn=0:sn++;
+        for(let i=0;i<S[sn].length;i++){
+            //生成一个ballObj对象加入到tsBall数组中
+            let x0=i%NUMS;
+            let y0=Math.floor(i/NUMS);
+            let ballObj=new Ball(x0,y0);
+            ballObj.createDivDom(S[sn][i]);
+            ballObj.randPositionDiv();
+            tsBalls.push(ballObj);
+        }
+    });
+    let bodyHeight=window.innerHeight;
+    let bodyWidth=window.innerWidth;
+    document.body.style.width=bodyWidth+'px';
+    document.body.style.height=bodyHeight+'px';
+    //每个盒子的宽高
+    let r=bodyWidth>bodyHeight?bodyHeight/(NUMS*2):bodyWidth/(NUMS*2);
+    //给盒子初始化位置
+    for(let i=0 ;i < S[sn].length ; i++){
+    //用来计算每个元素的横纵坐标的计数
+        let x0 = i % NUMS ;
+        let y0 = Math.floor ( i / NUMS ) ;
+        let ballObj = new Ball( x0 , y0 ) ;
+        ballObj.createDivDom(S[sn][i]) ;
+        ballObj.randPositionDiv() ;
+        tsBalls.push(ballObj) ; }
+    //Ball对象的设置
+    function Ball(x0,y0){
+        this.x0=x0;
+        this.y0=y0;
+        this.dom=null;
+        //生成盒子
+        this.createDivDom=function (s){
+            let div=document.createElement('div');
+            let p=document.createElement('p');
+            p.innerHTML=s;
+            //这里的r是全局变量,为盒子的宽高
+            p.style.fontSize=r/2+'px';
+            div.style.height=div.style.width=r+'px';
+            if(this.x0===5||this.y0===11){
+                div.className='db';
+            }
+            document.body.appendChild(div);
+            div.appendChild(p);
+            this.dom=div;
+
+        }
+        //随机生成盒子位置的方法
+        this.randPositionDiv=function (){
+            //这里的bodyWidth和bodyHeight为body的宽度(未赋值)
+           let x =Math.floor(Math.random()*bodyWidth);
+           if(x>bodyWidth-r){x=bodyWidth-r}
+           let y=Math.floor(Math.random()*bodyHeight);
+           if(y>bodyHeight){y=bodyHeight-r}
+           this.dom.style.top=y+'px';
+           this.dom.style.left=x+'px';
+        }
+        //设置盒子本来位置
+        this.setPositionDiv=function (){
+            let x=parseInt(this.x0)*1.5*r+500;
+            let y=parseInt(this.y0)*1.5*r;
+            this.dom.style.left=x+'px';
+            this.dom.style.top=y+'px';
+        }
+    }
+
+
+
+
+</script>
+</html>
