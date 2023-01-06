@@ -30,7 +30,7 @@
     const NUMS=6;
     let tsBalls=[];
     let sn=0;
-    const S = ['考生的信息，在这里显示。离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。远芳侵古道，晴翠接荒城。又送王孙去，萋萋满别情。' , '挽弓当挽强，用箭当用长。射人先射马，擒贼先擒王。' , '危楼高百尺，手可摘星辰。不敢高声语，恐惊天上人。'] ;
+    const S = ['20java一班20202993高杨泰。----离离原上草，一岁一枯荣。野火烧不尽，春风吹又生。远芳侵古道，晴翠接荒城。又送王孙去，萋萋满别情。' , '挽弓当挽强，用箭当用长。射人先射马，擒贼先擒王。' , '危楼高百尺，手可摘星辰。不敢高声语，恐惊天上人。'] ;
     document.body.addEventListener('mousemove',function (){
         for(let ball of tsBalls){ball.setPositionDiv();}
     });
@@ -75,6 +75,7 @@
         this.x0=x0;
         this.y0=y0;
         this.dom=null;
+        this.p1=null;
         //生成盒子
         this.createDivDom=function (s){
             let div=document.createElement('div');
@@ -89,17 +90,25 @@
             document.body.appendChild(div);
             div.appendChild(p);
             this.dom=div;
+            this.p1=p;
 
         }
         //随机生成盒子位置的方法
         this.randPositionDiv=function (){
             //这里的bodyWidth和bodyHeight为body的宽度(未赋值)
+            let color="";
            let x =Math.floor(Math.random()*bodyWidth);
            if(x>bodyWidth-r){x=bodyWidth-r}
            let y=Math.floor(Math.random()*bodyHeight);
            if(y>bodyHeight){y=bodyHeight-r}
            this.dom.style.top=y+'px';
            this.dom.style.left=x+'px';
+           //生成随机颜色
+            for (let i = 0; i < 6; i++) {
+               color+=Math.floor(Math.random() * 16).toString(16);
+            }
+            this.p1.style.color="#"+color;
+
         }
         //设置盒子本来位置
         this.setPositionDiv=function (){
